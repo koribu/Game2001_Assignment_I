@@ -1,37 +1,37 @@
 #pragma once
 #include "Array.h"
-
+#include <cassert>
 template<class T>
 class UnorderedArray : public Array<T>
 {
 public:
-	UnorderedArray(int size, int grow_by)
+	UnorderedArray(int size, int grow_by = 1)
 		: Array<T>(size, grow_by)
 	{
 
 	}
 
-	void push(T val) override
+	virtual void push(T searchKey)
 	{
-		assert(m_array != nullptr); // Debugging purposes
+		assert(this->m_array != nullptr); // Debugging purposes
 
-		if (m_numElements >= m_maxSize)	// Check if the array has to expand to accommodate the new data.
+		if (this->m_numElements >= this->m_maxSize)	// Check if the array has to expand to accommodate the new data.
 		{
-			Expand();
+			this->Expand();
 		}
 
 		// My array has space for a new value. Let's add it!
-		m_array[m_numElements] = val;
-		m_numElements++;
+		this->m_array[this->m_numElements] = searchKey;
+		this->m_numElements++;
 	}
-	int search(T val) override
+	virtual int search(T searchKey)
 	{
-		assert(m_array != nullptr);
+		assert(this->m_array != nullptr);
 
 		// Brute-force Search
-		for (int i = 0; i < m_numElements; i++)
+		for (int i = 0; i < this->m_numElements; i++)
 		{
-			if (m_array[i] == val)
+			if (this->m_array[i] == searchKey)
 			{
 				return i;	// Return the index of where the item is located in the array
 			}

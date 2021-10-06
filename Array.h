@@ -1,12 +1,15 @@
 #pragma once
-#include <assert.h>
+#ifndef __ARRAY__
+#define __ARRAY__
+
+#include <cassert>
 
 template<class T>
 class Array
 {
 public:
 
-	Array(int size, int growBy = 1)
+	Array(int size, int growBy = 1) : m_array(NULL), m_maxSize(0), m_growSize(0), m_numElements(0)
 	{
 		if (size)	// Is this a legal size for an array?
 		{
@@ -32,7 +35,7 @@ public:
 
 	}
 
-	virtual void push(T val);
+	virtual  void push(T val) = 0;
 	void pop()
 	{
 		if (m_numElements > 0)
@@ -63,7 +66,7 @@ public:
 		m_numElements--;
 	}
 
-	virtual int search(T val);
+	virtual int search(T val) = 0;
 	// Clear
 	void clear()
 	{
@@ -87,7 +90,7 @@ public:
 		assert(val >= 0);
 		m_growSize = val;
 	}
-private:
+protected:
 	// Private functions
 		// Expansion
 	bool Expand()
@@ -116,7 +119,7 @@ private:
 
 		return true;
 	}
-private:
+protected:
 	T* m_array;			// Pointer to the beginning of the array
 
 	int m_maxSize;		// Maximum size of the array
@@ -125,3 +128,6 @@ private:
 
 };
 
+
+
+#endif
