@@ -8,9 +8,23 @@ public:
 
 	Array(int size, int growBy = 1)
 	{
+		if (size)	// Is this a legal size for an array?
+		{
+			m_maxSize = size;
+			m_array = new T[m_maxSize];		// Dynamically allocating an array to m_maxSize
+			memset(m_array, 0, sizeof(T) * m_maxSize);	// Explicitly set 0 to all elements in the array
 
+			m_growSize = ((growBy > 0) ? growBy : 0);
+		}
 	}
-	~Array();
+	~Array()
+	{
+		if (m_array != nullptr)
+		{
+			delete[] m_array;
+			m_array = nullptr;
+		}
+	}
 	T& operator[](int index)
 	{
 		assert(m_array != nullptr && index < m_numElements);
@@ -49,7 +63,7 @@ public:
 		m_numElements--;
 	}
 
-	virtual int search(T val)
+	virtual int search(T val);
 	// Clear
 	void clear()
 	{

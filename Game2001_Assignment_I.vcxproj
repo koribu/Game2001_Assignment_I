@@ -140,9 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Array.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Array.cpp" />
+    <ClInclude Include="OrderedArray.h" />
+    <ClInclude Include="UnorderedArray.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
