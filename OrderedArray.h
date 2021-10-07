@@ -1,19 +1,32 @@
 #pragma once
 #include "Array.h"
-#include <cassert>
+
 template <class T >
 class OrderedArray : public Array<T>
 {
 public:
-	OrderedArray(int size, int grow_by = 1)
+	OrderedArray(int size, bool isDublicate = 1, int grow_by = 1)
 		: Array<T>(size, grow_by)
 	{
-
+		m_isDublicate = isDublicate;
 	}
 
 	virtual void push(T val) 
 	{
 		assert(this->m_array != nullptr);
+
+		if(!m_isDublicate)
+		{
+			for (int i = 0; i < this->m_numElements; ++i)
+			{
+				if(val == this->m_array[i])
+				{
+					cout << "The value you want to push is already exist!" << endl;
+					return;
+				}
+			}
+		}
+
 
 		if (this->m_numElements >= this->m_maxSize)
 		{
@@ -86,5 +99,8 @@ public:
 		return -1;	// Catch all return from danger.
 
 	}
+
+private:
+	bool m_isDublicate; // Flag for dublicatable or not
 };
 

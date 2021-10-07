@@ -2,7 +2,10 @@
 #ifndef __ARRAY__
 #define __ARRAY__
 
+#include <iostream>
 #include <cassert>
+
+using namespace std;
 
 template<class T>
 class Array
@@ -115,16 +118,19 @@ protected:
 		m_array = temp;
 		temp = nullptr;
 
+		cout << "Array expand from: " << GetMaxSize() <<" size to: ";
 		m_maxSize += m_growSize;
+
+		cout <<GetMaxSize() << endl;
+		m_growSize = m_growSize << 1;
 
 		return true;
 	}
 protected:
-	T* m_array;			// Pointer to the beginning of the array
-
-	int m_maxSize;		// Maximum size of the array
-	int m_growSize;		// Amount the array can grow through expansion
-	int m_numElements;	// Number of items currently in my array
+	T* m_array;		// Beginning of the array
+	int m_maxSize;	// Maximum size of the array
+	int m_growSize;	// Array expansion size
+	int m_numElements;	// Number of elements in the array
 
 };
 
